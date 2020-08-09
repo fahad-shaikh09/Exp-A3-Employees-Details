@@ -8,7 +8,15 @@ import AddEmployee from './components/AddEmployee';
 function App() {
   const [login, setLogin] = useState(false);
   const [addNew, setAddNew] = useState(false)
-  const [employeeObj,setEmployeeObj] = useState({})
+  const [employeeObj,setEmployeeObj] = useState({
+    // fname: "",
+    // lname: "",
+    // email: "",
+    // salary: "",
+    // date: ""
+  })
+
+  const [newEntryState,setNewEntryState] = useState(false)
 
   useEffect((
     () => {}
@@ -23,9 +31,11 @@ function App() {
   }
 
   function newEntry(obj){
-    setEmployeeObj(obj)
+    const {fname,lname,email,salary,date} = obj;  //Destructuring
+    setEmployeeObj(employeeObj => ({...employeeObj,fname,lname,email,salary,date}))
+    setNewEntryState(true)
   }
-  // console.log("employeeObj in App.js: ", employeeObj)
+    console.log("employeeObj in app.js", employeeObj)
 
 
   return (
@@ -33,7 +43,8 @@ function App() {
       <h1>Assignment 3 </h1>
       {login ? <Employees addNewEmployee={addNewEmployee} employeeObj={employeeObj} /> : <Login enableLogin={enableLogin} />}
 
-      {login && addNew && <AddEmployee newEntry={newEntry}/> }
+      {login && addNew && !newEntryState && <AddEmployee newEntry={newEntry}/> }
+      {login && addNew && newEntryState && <AddEmployee newEntry={newEntry}/> }
 
     </div>
   );

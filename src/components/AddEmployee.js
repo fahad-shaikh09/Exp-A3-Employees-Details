@@ -7,12 +7,7 @@ const AddEmployee = (props) => {
     const [salary, setSalary] = useState("")
     const [date, setDate] = useState("")
 
-    // console.log("Fname: ", fname)
-    // console.log("Lname: ", lname)
-    // console.log("Email: ", email)
-    // console.log("Salary: ", salary)
-    // console.log("Date: ", date)
-
+   
     function sendData() {
         var employeeObj = {
             fname,
@@ -21,7 +16,7 @@ const AddEmployee = (props) => {
             salary,
             date
         }
-        props.newEntry(employeeObj)
+        return (props.newEntry(employeeObj))
     }
     // console.log("Employee Obj in AddEmployee Component: ", employeeObj)
     return (
@@ -44,7 +39,7 @@ const AddEmployee = (props) => {
             Enter Date of joining: <input type="date" onChange={(e) => setDate(e.target.value)} placeholder="Enter Date of Joining" /> <br />
                 <br />
             </div>
-            <button onClick={sendData}>Add new Employee's details</button>
+            <button onClick={() => sendData()}>Add new Employee's details</button>
 
         </div>
     )

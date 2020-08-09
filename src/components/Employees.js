@@ -21,13 +21,13 @@ function createData(fname, lname, email, salary , date) {
 
 
 export default function Employees(props) {
-  const rows = [
-    // createData("Fahad", "Shaikh", "test@mail.com", 1000, "1st Aug"),
-    createData(props.employeeObj.fname, props.employeeObj.lname, props.employeeObj.email, props.employeeObj.salary, props.employeeObj.date),
-  ];
-  console.log("props in Employee.js: ", props)
-
-  const classes = useStyles();
+  const {fname,lname,email,salary,date} = props.employeeObj; //Destructuring of obj
+  console.log("props received in Employees.js: ", props)
+  let rows = []
+  rows.push(createData(fname,lname,email,salary,date))
+  
+  
+      const classes = useStyles();
 
   return (
     <TableContainer component={Paper}>
@@ -44,9 +44,7 @@ export default function Employees(props) {
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.fname}
-              </TableCell>
+              <TableCell component="th" scope="row"> {row.fname} </TableCell>
               <TableCell align="center">{row.lname}</TableCell>
               <TableCell align="center">{row.email}</TableCell>
               <TableCell align="center">{row.salary}</TableCell>
