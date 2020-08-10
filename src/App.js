@@ -34,6 +34,7 @@ function App() {
     const {fname,lname,email,salary,date} = obj;  //Destructuring
     setEmployeeObj(employeeObj => ({...employeeObj,fname,lname,email,salary,date}))
     setNewEntryState(true)
+    setAddNew(false);
   }
     console.log("employeeObj in app.js", employeeObj)
 

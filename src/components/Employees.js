@@ -15,17 +15,21 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(fname, lname, email, salary , date) {
-  return { fname, lname, email, salary , date };
-}
+// function createData(fname, lname, email, salary , date) {
+//   return { fname, lname, email, salary , date };
+// }
 
 
 export default function Employees(props) {
   const {fname,lname,email,salary,date} = props.employeeObj; //Destructuring of obj
   console.log("props received in Employees.js: ", props)
-  let rows = []
-  rows.push(createData(fname,lname,email,salary,date))
-  
+
+  var newObj={fname,lname,email,salary,date};
+  var tempArray = [];
+
+  var rows = tempArray.concat(newObj)
+  // console.log("rows: ", rows)
+  // rows.push()
   
       const classes = useStyles();
 
