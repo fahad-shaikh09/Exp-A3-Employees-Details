@@ -39,7 +39,7 @@ const AddEmployee = (props) => {
             Enter Date of joining: <input type="date" onChange={(e) => setDate(e.target.value)} placeholder="Enter Date of Joining" /> <br />
                 <br />
             </div>
-            <button onClick={() => sendData()}>Add new Employee's details</button>
+            <button onClick={sendData}>Add new Employee's details</button>
 
         </div>
     )
