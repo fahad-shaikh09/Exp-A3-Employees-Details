@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState, useeFfect, useEffect} from 'react'
 
 const EditEmployee = (props) => {
     const [fname, setFname] = useState("")
@@ -21,8 +21,13 @@ const EditEmployee = (props) => {
             salary,
             date
         }
-        props.changedData(newObj)
+        props.changedData(newObj);
     }
+
+useEffect(() => {
+   return () => props.isSavedAppjs();   
+}) 
+
 
     return (
         <div>
@@ -43,8 +48,11 @@ const EditEmployee = (props) => {
             <input type="date" onChange={(e) => setDate(e.target.value)} placeholder="Enter Date of Joining" />  <br />
             <br />
 
-            <button onClick={() => finalData()}>Save</button>
-
+            <button onClick={() => finalData()}> Save </button>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         </div>
     )
 }

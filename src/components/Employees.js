@@ -24,12 +24,13 @@ export default function Employees(props) {
 
   const [rows, setRows] = useState([]);
 
-  const receivedObj = props.employeeObj;
-
+  // const [finalRender,setFinalRender] = useState(false)
   // console.log("rows: ", rows)
-
-
+  
+  
+  var receivedObj = props.employeeObj;
   useEffect(() => {
+    if(Object.keys(receivedObj) != "")
     setRows(oldArray => [...oldArray, receivedObj])
   }, [receivedObj])
 
@@ -39,27 +40,26 @@ export default function Employees(props) {
     let tempArray = [...rows];
     tempArray.splice(index, 1);
     setRows(tempArray)
+    // setFinalRender(true)
   }
 
-  // useEffect(
 
-  // ,[props.data])
 
   function editRow(index) {
     workingArray = [...rows];
 
     console.log("Object to be modified", workingArray[index]);
-    
-    props.editingEmployee();  //renders new input form
 
-    if(props.data != undefined)
-      { 
-        workingArray[index] = props.data;
-      }
-      setRows(workingArray)
-    
+    props.editingEmployee();  //calls functions which renders new input form
 
+    if (props.data != undefined) {
+      workingArray[index] = props.data;
+    }
+    setRows(workingArray)
+    // setRows(oldArray => [...oldArray, workingArray])
   }
+
+
 
   return (
     <TableContainer component={Paper}>
@@ -73,6 +73,8 @@ export default function Employees(props) {
             <TableCell align="center">Salary</TableCell>
             <TableCell align="center">Job Start Date</TableCell>
             <TableCell align="center">Action</TableCell>
+            <TableCell align="center">Edit</TableCell>
+
           </TableRow>
         </TableHead>
 
