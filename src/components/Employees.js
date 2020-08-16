@@ -42,7 +42,6 @@ export default function Employees(props) {
   }
 
   // useEffect(
-  //  ( console.log("useEffect is running"))
 
   // ,[props.data])
 
@@ -52,22 +51,14 @@ export default function Employees(props) {
     console.log("Object to be modified", workingArray[index]);
     
     props.editingEmployee();  //renders new input form
+
+    if(props.data != undefined)
+      { 
+        workingArray[index] = props.data;
+      }
+      setRows(workingArray)
     
-    // const {fname,lname,email,salary,date} = props.data;
 
-    // workingArray[index].fname = fname;
-    // workingArray[index].lname = lname;
-    // workingArray[index].email = email;
-    // workingArray[index].salary = salary;
-    // workingArray[index].date = date;
-   
-    // console.log("fname after change:", workingArray[index].fname)
-    // console.log("lname after change:", workingArray[index].lname)
-    // console.log("email after change:", workingArray[index].email)
-    // console.log("salary after change:", workingArray[index].salary)
-    // console.log("date after change:", workingArray[index].date)
-
-    // setRows(workingArray)
   }
 
   return (

@@ -39,7 +39,8 @@ function App() {
 
   function changedData(editedObj) {
     console.log("new obj in app.js:", editedObj)
-    SetData(editedObj)
+    SetData(editedObj);
+    SetEdit(false);
   }
 
   return (
