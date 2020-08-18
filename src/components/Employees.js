@@ -18,46 +18,45 @@ const useStyles = makeStyles({
 
 
 export default function Employees(props) {
-  var workingArray;
   const classes = useStyles();
   console.log("props received in Employees.js: ", props)
 
   const [rows, setRows] = useState([]);
 
-  // const [finalRender,setFinalRender] = useState(false)
-  // console.log("rows: ", rows)
-  
-  
+
   var receivedObj = props.employeeObj;
   useEffect(() => {
-    if(Object.keys(receivedObj) != "")
-    setRows(oldArray => [...oldArray, receivedObj])
+    if (Object.keys(receivedObj) != "")
+      setRows(oldArray => [...oldArray, receivedObj])
   }, [receivedObj])
 
-  console.log('rows array: ', rows)
+  // console.log('rows array: ', rows)
 
   function deleteRow(index) {
     let tempArray = [...rows];
     tempArray.splice(index, 1);
     setRows(tempArray)
-    // setFinalRender(true)
   }
-
 
 
   function editRow(index) {
-    workingArray = [...rows];
+    let workingArray = [...rows];
 
-    console.log("Object to be modified", workingArray[index]);
-
-    props.editingEmployee();  //calls functions which renders new input form
-
-    if (props.data != undefined) {
-      workingArray[index] = props.data;
+    //calls functions which renders new input form
+    props.editingEmployee();
+    console.log("console after props.editingEmployee func")
+    if(props.data.fname !== "" || props.data.lname !== "" || props.data.email !== "" || props.data.salary !== "" || props.data.date !== "") {
+      setRows(workingArray[index].fname = props.data.fname);
+      setRows(workingArray[index].lname = props.data.lname);
+      setRows(workingArray[index].email = props.data.email);
+      setRows(workingArray[index].salary = props.data.salary);
+      setRows(workingArray[index].date = props.data.date);
     }
     setRows(workingArray)
-    // setRows(oldArray => [...oldArray, workingArray])
   }
+
+  // console.log('rows array before return: ', rows)
+
 
 
 

@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Login from "./components/Login"
 import Employees from "./components/Employees"
@@ -6,58 +6,54 @@ import AddEmployee from './components/AddEmployee';
 import EditEmployee from "./components/EditEmployee"
 
 function App() {
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(true);
   const [addNew, setAddNew] = useState(false)
   const [employeeObj, setEmployeeObj] = useState({})
-  const [newEntryState, setNewEntryState] = useState(false)
-  const [edit, SetEdit] = useState(false)
-  const [data, SetData] = useState()
-  const [isSaved,setIsSaved] = useState(false)
+  const [edit, setEdit] = useState(false)
+  const [data, setData] = useState("")
+  const [isSaved, setIsSaved] = useState(false)
+  const [showEmployee, setShowEmployee] = useState(true)
 
-
-  
   function enableLogin() {
     setLogin(true)
   }
-  
+
   function addNewEmployee() {
     setAddNew(true)
   }
-  
+
   function newEntry(obj) {
     const { fname, lname, email, salary, date } = obj;  //Destructuring
     setEmployeeObj((employeeObj) => ({ ...employeeObj, fname, lname, email, salary, date }))
-    setNewEntryState(true)
     setAddNew(false);
   }
-  // console.log("employeeObj in app.js", employeeObj)
   function editingEmployee() {
-    SetEdit(true)
+    setShowEmployee(false)
+    setEdit(true)
   }
-  
+
   function changedData(editedObj) {
     console.log("new obj in app.js:", editedObj)
-    SetData(editedObj);
-    SetEdit(false);
+    setEdit(false);
+    setData(editedObj); //will give edited data to employees as props to render
+    setShowEmployee(true)
   }
-  
-  function isSavedAppjs(){
+
+  function isSavedAppjs() {
     setIsSaved(true)
     console.log("isSaved: ", isSaved)
   }
+
   
- 
 
   return (
     <div className="App">
       <h1>Assignment 3 </h1>
-      {login ? !edit  && <Employees addNewEmployee={addNewEmployee} employeeObj={employeeObj} newEntryState={newEntryState} editingEmployee={editingEmployee} data={data} /> : <Login enableLogin={enableLogin} />}
+      {login ? showEmployee && <Employees addNewEmployee={addNewEmployee} employeeObj={employeeObj} editingEmployee={editingEmployee} data={data}/> : <Login enableLogin={enableLogin} />}
 
+      {login && addNew && <AddEmployee newEntry={newEntry} />}
 
-      {login && addNew && !newEntryState && <AddEmployee newEntry={newEntry} />}
-      {login && addNew && newEntryState && <AddEmployee newEntry={newEntry} />}
-      {login && edit && <EditEmployee changedData={changedData} isSavedAppjs={isSavedAppjs}/>}
-     
+      {login && edit && <EditEmployee changedData={changedData} isSavedAppjs={isSavedAppjs} />}
 
 
     </div>
