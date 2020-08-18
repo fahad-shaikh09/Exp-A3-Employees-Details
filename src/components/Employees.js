@@ -40,24 +40,22 @@ export default function Employees(props) {
 
 
   function editRow(index) {
-    let workingArray = [...rows];
-
+    let tempArray = [...rows]
     //calls functions which renders new input form
     props.editingEmployee();
-    console.log("console after props.editingEmployee func")
     if(props.data.fname !== "" || props.data.lname !== "" || props.data.email !== "" || props.data.salary !== "" || props.data.date !== "") {
-      setRows(workingArray[index].fname = props.data.fname);
-      setRows(workingArray[index].lname = props.data.lname);
-      setRows(workingArray[index].email = props.data.email);
-      setRows(workingArray[index].salary = props.data.salary);
-      setRows(workingArray[index].date = props.data.date);
+      console.log("props in if statement:", props)
+      setRows(tempArray[index] = props.data);
+      
+      // setRows(tempArray[index].fname = props.data.fname);
+      // setRows(tempArray[index].lname = props.data.lname);
+      // setRows(tempArray[index].email = props.data.email);
+      // setRows(tempArray[index].salary = props.data.salary);
+      // setRows(tempArray[index].date = props.data.date);
     }
-    setRows(workingArray)
+    // setRows[index]= tempArray
+    // setRows(oldArray => [...oldArray, tempArray])
   }
-
-  // console.log('rows array before return: ', rows)
-
-
 
 
   return (
