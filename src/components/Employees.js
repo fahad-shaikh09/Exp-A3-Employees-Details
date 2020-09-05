@@ -16,21 +16,33 @@ const useStyles = makeStyles({
   },
 });
 
-
+//COMPONENT TO DISPLAY EMPLOYEE'S LIST
 export default function Employees(props) {
   const classes = useStyles();
-  console.log("props received in Employees.js: ", props)
-
-  const [rows, setRows] = useState([]);
-
-
+  // console.log("props received in Employees.js: ", props)
   var receivedObj = props.employeeObj;
+  var index = props.index
+ var data=props.data;
+
+  var [rows, setRows] = useState([]);
+
+
   useEffect(() => {
-    if (Object.keys(receivedObj) != "")
+    if(Object.keys(receivedObj) != "")
       setRows(oldArray => [...oldArray, receivedObj])
   }, [receivedObj])
+  
+  useEffect(() => {
+    updateRow(receivedObj,index)
+  }, [data])
 
-  // console.log('rows array: ', rows)
+  function updateRow(obj, index) {
+    let tempArray = rows
+    tempArray[index] = obj
+    console.log("temparray", tempArray)
+    console.log("rows arrary: ", rows)
+    setRows(tempArray)
+  }
 
   function deleteRow(index) {
     let tempArray = [...rows];
@@ -41,22 +53,13 @@ export default function Employees(props) {
 
   function editRow(index) {
     let tempArray = [...rows]
+    let obj = tempArray[index]
     //calls functions which renders new input form
-    props.editingEmployee();
-    if(props.data.fname !== "" || props.data.lname !== "" || props.data.email !== "" || props.data.salary !== "" || props.data.date !== "") {
-      console.log("props in if statement:", props)
-      setRows(tempArray[index] = props.data);
-      
-      // setRows(tempArray[index].fname = props.data.fname);
-      // setRows(tempArray[index].lname = props.data.lname);
-      // setRows(tempArray[index].email = props.data.email);
-      // setRows(tempArray[index].salary = props.data.salary);
-      // setRows(tempArray[index].date = props.data.date);
-    }
-    // setRows[index]= tempArray
-    // setRows(oldArray => [...oldArray, tempArray])
+    props.editingEmployee(obj,index);
+
   }
 
+////////////////////////////////////////////////////////////////////
 
   return (
     <TableContainer component={Paper}>
